@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #coding:utf-8
+#by xjm
 
 import sys
 import logging
@@ -7,12 +8,10 @@ import argparse
 from Bio import SeqIO
 
 def read_fa(fa_file):
-  #with open(fa_file+'.out','w') as fh:
     seq_dict = {}
     for record in SeqIO.parse(fa_file,'fasta'):
-      if 'HSDAV1212s' in record.id or 'HSDAV0110s' in record.id:
+      if 'HSDAV1212s' in record.id or 'HSDAV0110s' in record.id:  #You can change the strings or add them to the arguments
         seq_dict[record.id] = record.seq
-        #fh.write(">%s\n%s\n" % (record.id,record.seq))
       else:
         continue
     return seq_dict
@@ -26,7 +25,6 @@ def get_same(fa_file,dict_seq):
  
 def set_args(parser):
   parser.add_argument('-i','--input',metavar='FILE',type=str,required=True,help='Input file')
-  #parser.add_argument('-o','--out',metavar='STR',type=str,default='out.fasta.mafft',help='output file name')
   return parser
 
 def main():
@@ -46,4 +44,3 @@ Description:
 
 if __name__ == "__main__":
   main()
-
